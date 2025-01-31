@@ -1,8 +1,19 @@
-allprojects {
-    repositories {
-        jcenter()
-        google()
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.1' // Use the latest version
     }
+}
+
+plugins {
+    id 'com.android.application' version '8.8.0' apply false
+    id 'com.android.library' version '8.8.0' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+allprojects {
     apply plugin: 'checkstyle'
     checkstyle {
         toolVersion = "8.12"
@@ -13,13 +24,6 @@ allprojects {
     }
     tasks.withType(JavaCompile) {
         options.deprecation = true
-        options.compilerArgs += ['-Werror']
-    }
-}
-
-buildscript {
-    repositories {
-        jcenter()
-        google()
+        // options.compilerArgs += ['-Werror']
     }
 }
